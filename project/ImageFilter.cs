@@ -13,7 +13,6 @@ namespace project
     public class ImageFilter : ImageRecognition
     {
         
-        
         public static Bitmap AdjustBrightness(Bitmap image, float brightness)
         {
             float b = brightness / 2;
@@ -93,6 +92,7 @@ namespace project
             return  rotated;
 
         }
+
 
         public static Bitmap DrawAsGrayscale(Image sourceImage)
         {
@@ -178,6 +178,7 @@ namespace project
             Bitmap result = ConvolutionFilter(sourceBitmap, Laplacian3x3,1.0,0, grayscale);
 
             return result;
+
         }
 
 

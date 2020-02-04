@@ -17,6 +17,9 @@ using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Threading;
 
+using Microsoft.ML;
+using Microsoft.ML.Data;
+
 namespace project
 {
     public partial class MainWindow : Form
@@ -24,7 +27,9 @@ namespace project
        
         private UserImage UploadedImageBitmap { get; set; }
        // public Bitmap WorkingOnImage { get; set; }
+
         public FilterInfoCollection videoDevices { get; set; }
+
         public VideoCaptureDevice videoSource { get; set; }
         
         public List<UserImage> userImages { get; set; }
@@ -64,6 +69,7 @@ namespace project
                 UploadedImageBitmap.startBM = UploadedImageBitmap.BM;
                 pictureBox1.Image = UploadedImageBitmap.BM;
             }
+
             //get the values for trackbars from JSON
             int index = 0;
             foreach (var image in userImages)
@@ -140,11 +146,11 @@ namespace project
             UploadedImageBitmap.brightness = trackBar1.Value;
             UpdateTrackBarTextboxes(UploadedImageBitmap);
             
+            
         }
 
         private void ContrastAdjustment(object sender, EventArgs e) {
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.startBM, trackBar2.Value);
-
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.BM, UploadedImageBitmap.brightness);
             UploadedImageBitmap.BM = ImageFilter.adjustSaturation(UploadedImageBitmap.BM, UploadedImageBitmap.saturation);
 
@@ -152,8 +158,9 @@ namespace project
 
 
             UploadedImageBitmap.contrast = trackBar2.Value;
-            UpdateTrackBarTextboxes(UploadedImageBitmap);       
-            
+            UpdateTrackBarTextboxes(UploadedImageBitmap);
+           
+
         }
      
 
@@ -169,6 +176,7 @@ namespace project
             UploadedImageBitmap.saturation = trackBar3.Value;
             UpdateTrackBarTextboxes(UploadedImageBitmap);
             
+
         }
 
         
@@ -212,11 +220,14 @@ namespace project
 
             Graphics gfx = Graphics.FromImage(image);
 
-            SolidBrush brush = new SolidBrush(ImageRecognition.FindTheMostReoccuringColor(new Bitmap(pictureBox1.Image)));
+            Color color = ImageRecognition.FindTheMostReoccuringColor(new Bitmap(pictureBox1.Image));
+            SolidBrush brush = new SolidBrush(color);
 
             gfx.FillRectangle(brush, 0, 0, 50,50);
 
             pictureBox4.Image =  image;
+
+            textBox6.Text = color.ToString();
         }
 
 
@@ -244,8 +255,6 @@ namespace project
 
             if (pictureBox1.Image != null) { pictureBox1.Image.Dispose(); }
             pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-           
-
 
         }
 
@@ -275,8 +284,7 @@ namespace project
                 pictureBox2.Image = new Bitmap(opnfd.FileName);
 
             }
-
-            
+    
         }
 
         private void picbox3_upload(object sender, EventArgs e)
@@ -304,7 +312,7 @@ namespace project
         private void compareUsingLaplacian(object sender, EventArgs e)
         {
             //could outline the white outline using a pen tool and replace a bitmap with that sketch
-            bool grayscale = false;
+            bool grayscale = true;
             Bitmap BM1 = ImageFilter.Laplacian3x3Filter(new Bitmap (pictureBox2.Image), grayscale);
             Bitmap BM2 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox3.Image), grayscale);
 
@@ -377,7 +385,28 @@ namespace project
         
         }
 
-      
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SuggestedFilterButton(object sender, EventArgs e)
+        {
+            MLContext mlContext = new MLContext();
+            ITransformer model = MachineLearning.GenerateModel(mlContext);
+           textBox7.Text =  MachineLearning.ClassifySingleImage(mlContext, model);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            DisplayMostReoccuringColor();
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+           pictureBox1.Image =  ImageFilter.RotateImage90CW(pictureBox1.Image);
+        }
 
 
 
@@ -389,23 +418,10 @@ namespace project
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
 
-        private void label8_Click(object sender, EventArgs e)
+        private void textBox7_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void SuggestedFilterButton(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void pictureBox4_Click(object sender, EventArgs e)
-        {
-            DisplayMostReoccuringColor();
-        }
-
-
-
 
 
         // Start selecting the rectangle.
@@ -422,7 +438,7 @@ namespace project
         private void picOriginal_MouseMove(object sender, MouseEventArgs e)
         {
             
-            // Do nothing it we're not selecting an area.
+            // Do nothing if we're not selecting an area.
             if (!IsSelecting) return;
 
             // Save the new point.
@@ -444,6 +460,7 @@ namespace project
             // Display the temporary bitmap.
             pictureBox1.Image = bm;
             
+            
         }
 
         // Finish selecting the area.
@@ -457,19 +474,18 @@ namespace project
             pictureBox1.Image = UploadedImageBitmap.BM;
 
             // Copy the selected part of the image.
-            int wid = Math.Abs(X0 - X1);
-            int hgt = Math.Abs(Y0 - Y1);
-            if ((wid < 1) || (hgt < 1)) return;
+            int width = Math.Abs(X0 - X1);
+            int height = Math.Abs(Y0 - Y1);
+            if ((width < 1) || (height < 1)) return;
 
-            Bitmap area = new Bitmap(wid, hgt);
+            Bitmap area = new Bitmap(width, height);
             using (Graphics gr = Graphics.FromImage(area))
             {
-                Rectangle source_rectangle =
-                    new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), wid, hgt);
-                Rectangle dest_rectangle =
-                    new Rectangle(0, 0, wid, hgt);
-                gr.DrawImage(UploadedImageBitmap.BM, dest_rectangle,
-                    source_rectangle, GraphicsUnit.Pixel);
+                Rectangle source_rectangle = new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), width, height);
+                
+                Rectangle dest_rectangle = new Rectangle(0, 0, width, height);
+               
+                gr.DrawImage(UploadedImageBitmap.BM, dest_rectangle, source_rectangle, GraphicsUnit.Pixel);
             }
 
             // Display the result.

@@ -75,6 +75,9 @@
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.button17 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -473,7 +476,7 @@
             // 
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Location = new System.Drawing.Point(728, 392);
+            this.pictureBox4.Location = new System.Drawing.Point(715, 392);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -492,28 +495,56 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(939, 400);
+            this.button17.Location = new System.Drawing.Point(939, 429);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(75, 23);
+            this.button17.Size = new System.Drawing.Size(158, 42);
             this.button17.TabIndex = 44;
-            this.button17.Text = "Suggested Filter";
+            this.button17.Text = "Machine";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.SuggestedFilterButton);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(723, 376);
+            this.label9.Location = new System.Drawing.Point(713, 376);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 13);
             this.label9.TabIndex = 45;
             this.label9.Text = "Main Color";
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(521, 376);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(90, 23);
+            this.button18.TabIndex = 46;
+            this.button18.Text = "Rotate 90 CW";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(603, 448);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(193, 20);
+            this.textBox6.TabIndex = 47;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(828, 482);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(379, 20);
+            this.textBox7.TabIndex = 48;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1234, 642);
+            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.button18);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.pictureBox5);
@@ -623,5 +654,8 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
     }
 }

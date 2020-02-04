@@ -106,7 +106,7 @@ namespace project
 
             int equalElements = pixelsSource.Zip(pixelsCompared, (i, j) => i == j).Count(eq => eq);
 
-            if (equalElements >= 256*256*1)
+            if (equalElements == 256*256*1)
             {
                 pathString = System.IO.Path.Combine(folderName, "Same Image");
                 System.IO.Directory.CreateDirectory(pathString);
@@ -219,6 +219,15 @@ namespace project
         
         }
 
+
+
+        //https://softwarebydefault.com/2013/05/11/image-edge-detection/comment-page-1/
+        //Convolution is a simple mathematical operation which is fundamental to many common image processing operators. 
+        //Convolution provides a way of `multiplying together’ two arrays of numbers, generally of different sizes, but of the same dimensionality, 
+        //to produce a third array of numbers of the same dimensionality. This can be used in image processing to implement operators whose output pixel 
+        //values are simple linear combinations of certain input pixel values.
+        //In an image processing context, one of the input arrays is normally just a graylevel image.The second array is usually much smaller, 
+        //and is also two-dimensional(although it may be just a single pixel thick), and is known as the kernel.
         public static Bitmap ConvolutionFilter(Bitmap sourceBitmap, double[,] filterMatrix, double factor,  int bias, bool grayscale)
         {
             BitmapData sourceData =
