@@ -7,22 +7,22 @@ using Microsoft.ML.Data;
 
 namespace project
 {
+    //https://docs.microsoft.com/en-us/dotnet/machine-learning/tutorials/image-classification
     class MachineLearning
     {
-        static readonly string _assetsPath = Path.Combine(Environment.CurrentDirectory, "assets");
+        //static readonly string _assetsPath = Path.Combine(Environment.CurrentDirectory, "assets");
+
+        static readonly string _assetsPath = Path.Combine( @"D:\Images\" , "assets");
+        
         static readonly string _imagesFolder = Path.Combine(_assetsPath, "images");
         static readonly string _trainTagsTsv = Path.Combine(_imagesFolder, "tags.tsv");
         static readonly string _testTagsTsv = Path.Combine(_imagesFolder, "test-tags.tsv");
-        static readonly string _predictSingleImage = Path.Combine(_imagesFolder, "toaster3.jpg");
+      //  static public string _predictSingleImage = Path.Combine(_imagesFolder, "woods.jpg");
+        static public string _predictSingleImage ;
         static readonly string _inceptionTensorFlowModel = Path.Combine(_assetsPath, "inception", "tensorflow_inception_graph.pb");
-        //static void //main(string[] args)
-        //{
+        //https://stackoverflow.com/questions/51278213/what-is-the-use-of-a-pb-file-in-tensorflow-and-how-does-it-work
 
-        //    MLContext mlContext = new MLContext();
-        //    ITransformer model = GenerateModel(mlContext);
-        //    ClassifySingleImage(mlContext, model);
-
-        //}
+      
         private struct InceptionSettings
         {
             public const int ImageHeight = 224;
@@ -54,7 +54,7 @@ namespace project
 
             // Create an IEnumerable for the predictions for displaying results
             IEnumerable<ImagePrediction> imagePredictionData = mlContext.Data.CreateEnumerable<ImagePrediction>(predictions, true);
-            DisplayResults(imagePredictionData);
+           // DisplayResults(imagePredictionData);
 
             MulticlassClassificationMetrics metrics =
              mlContext.MulticlassClassification.Evaluate(predictions,
@@ -77,7 +77,7 @@ namespace project
             }
         }
 
-        public static string ClassifySingleImage(MLContext mlContext, ITransformer model)
+        public static string[] ClassifySingleImage(MLContext mlContext, ITransformer model)
         {
             var imageData = new ImageData()
             {
@@ -89,7 +89,8 @@ namespace project
             var prediction = predictor.Predict(imageData);
 
             string output = $"Image: {Path.GetFileName(imageData.ImagePath)} predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ";
-            return output;
+            string[] result = new string[2] { output, prediction.PredictedLabelValue };
+            return result;
         }
 
 

@@ -96,7 +96,7 @@
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.pictureBox1.Location = new System.Drawing.Point(36, 36);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(575, 334);
+            this.pictureBox1.Size = new System.Drawing.Size(575, 335);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -470,7 +470,7 @@
             this.label8.Size = new System.Drawing.Size(93, 13);
             this.label8.TabIndex = 41;
             this.label8.Text = "Filter Suggestions:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+            
             // 
             // pictureBox4
             // 
@@ -482,7 +482,7 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 42;
             this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            this.pictureBox4.Click += new System.EventHandler(this.recurringColorBox);
             // 
             // pictureBox5
             // 
@@ -501,7 +501,7 @@
             this.button17.TabIndex = 44;
             this.button17.Text = "Machine";
             this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.SuggestedFilterButton);
+            this.button17.Click += new System.EventHandler(this.GetCategory);
             // 
             // label9
             // 
@@ -520,7 +520,7 @@
             this.button18.TabIndex = 46;
             this.button18.Text = "Rotate 90 CW";
             this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
+            this.button18.Click += new System.EventHandler(this.Rotate90CW);
             // 
             // textBox6
             // 
@@ -531,11 +531,10 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(828, 482);
+            this.textBox7.Location = new System.Drawing.Point(811, 482);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(379, 20);
             this.textBox7.TabIndex = 48;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // MainWindow
             // 

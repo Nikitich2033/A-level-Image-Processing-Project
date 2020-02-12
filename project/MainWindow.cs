@@ -44,7 +44,7 @@ namespace project
         {
 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+           // pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.BorderStyle = BorderStyle.Fixed3D;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.BorderStyle = BorderStyle.Fixed3D;
@@ -89,9 +89,6 @@ namespace project
                 //suserImages.RemoveAt(index);
             }
 
-
-           
-           
         
         }
 
@@ -220,7 +217,7 @@ namespace project
 
             Graphics gfx = Graphics.FromImage(image);
 
-            Color color = ImageRecognition.FindTheMostReoccuringColor(new Bitmap(pictureBox1.Image));
+            Color color = ImageManipulation.FindTheMostReoccuringColor(new Bitmap(pictureBox1.Image));
             SolidBrush brush = new SolidBrush(color);
 
             gfx.FillRectangle(brush, 0, 0, 50,50);
@@ -261,17 +258,17 @@ namespace project
 
         private void FindRectanglesButton(object sender, EventArgs e)
         {
-            ImageRecognition.FindRect(UploadedImageBitmap.BM);
+            ImageManipulation.FindRect(UploadedImageBitmap.BM);
         }
 
         private void FindObjectsButton(object sender, EventArgs e)
         {
-           pictureBox1.Image =  ImageRecognition.FindObjects(UploadedImageBitmap.BM);
+           pictureBox1.Image =  ImageManipulation.FindObjects(UploadedImageBitmap.BM);
         }
 
         private void DisplyaEdgesButton(object sender, EventArgs e)
         {
-            pictureBox1.Image =  ImageRecognition.DisplayEdges(UploadedImageBitmap.BM);
+            pictureBox1.Image =  ImageManipulation.DisplayEdges(UploadedImageBitmap.BM);
         }
 
         private void picbox2_upload(object sender, EventArgs e)
@@ -305,7 +302,7 @@ namespace project
             Bitmap BM1 = new Bitmap(pictureBox2.Image);
             Bitmap BM2 = new Bitmap(pictureBox3.Image);
 
-           textBox4.Text =  ImageRecognition.CompareImages(BM1, BM2).ToString();
+           textBox4.Text =  ImageManipulation.CompareImages(BM1, BM2).ToString();
 
         }
 
@@ -325,7 +322,7 @@ namespace project
             pictureBox2.Image = BM1;
             pictureBox3.Image = BM2;
 
-            textBox4.Text = ImageRecognition.CompareImages(BM1, BM2).ToString();
+            textBox4.Text = ImageManipulation.CompareImages(BM1, BM2).ToString();
 
         }
 
@@ -356,7 +353,7 @@ namespace project
                 {
                    
                     pictureBox3.Image = new Bitmap(Filepath);
-                        textBox4.Text = ImageRecognition.CompareImages(new Bitmap(pictureBox2.Image), new Bitmap(pictureBox3.Image)).ToString();
+                        textBox4.Text = ImageManipulation.CompareImages(new Bitmap(pictureBox2.Image), new Bitmap(pictureBox3.Image)).ToString();
 
                     await Task.Delay(1000);
 
@@ -386,24 +383,23 @@ namespace project
         }
 
 
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SuggestedFilterButton(object sender, EventArgs e)
+        private void GetCategory(object sender, EventArgs e)
         {
             MLContext mlContext = new MLContext();
             ITransformer model = MachineLearning.GenerateModel(mlContext);
-           textBox7.Text =  MachineLearning.ClassifySingleImage(mlContext, model);
+            MachineLearning._predictSingleImage = UploadedImageBitmap.filepath;
+            textBox7.Text =  MachineLearning.ClassifySingleImage(mlContext, model)[0];
+
+            UploadedImageBitmap.Category = MachineLearning.ClassifySingleImage(mlContext, model)[1];
+          //image category = prediction.PredictedLabelValue
         }
 
-        private void pictureBox4_Click(object sender, EventArgs e)
+        private void recurringColorBox(object sender, EventArgs e)
         {
             DisplayMostReoccuringColor();
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void Rotate90CW(object sender, EventArgs e)
         {
            pictureBox1.Image =  ImageFilter.RotateImage90CW(pictureBox1.Image);
         }
@@ -418,17 +414,11 @@ namespace project
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
 
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
         // Start selecting the rectangle.
         private void picOriginal_MouseDown(object sender, MouseEventArgs e)
         {
             IsSelecting = true;
-
+            
             // Save the start point.
             X0 = e.X;
             Y0 = e.Y;
@@ -446,21 +436,20 @@ namespace project
             Y1 = e.Y;
 
             // Make a Bitmap to display the selection rectangle.
-            Bitmap bm = new Bitmap(UploadedImageBitmap.BM);
-            
+             Bitmap bm = new Bitmap(UploadedImageBitmap.BM);
+           
 
             // Draw the rectangle.
             using (Graphics gr = Graphics.FromImage(bm))
             {
                 gr.DrawRectangle(Pens.Red,
                     Math.Min(X0, X1), Math.Min(Y0, Y1),
-                    Math.Abs(X0 - X1), Math.Abs(Y0 - Y1));
+                    Math.Abs(X0 - X1), Math.Abs(Y0 - Y1));   
             }
 
             // Display the temporary bitmap.
             pictureBox1.Image = bm;
-            
-            
+     
         }
 
         // Finish selecting the area.

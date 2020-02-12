@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 
 namespace project
 {
-    public class ImageFilter : ImageRecognition
+    public class ImageFilter : ImageManipulation
     {
         
         public static Bitmap AdjustBrightness(Bitmap image, float brightness)

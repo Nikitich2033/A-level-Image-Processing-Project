@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 
 namespace project
 {
-    public class ImageRecognition
+    public class ImageManipulation
     {
 
         public static List<bool> GetPixels(Bitmap image)
@@ -85,14 +85,6 @@ namespace project
 
         }
     
-
-  
-
-
-
-        
-        
-
 
         public static string CompareImages(Bitmap sourceImage, Bitmap comparedToImage)
         {
