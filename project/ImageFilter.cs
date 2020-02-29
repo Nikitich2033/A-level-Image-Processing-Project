@@ -55,7 +55,7 @@ namespace project
 
         }
 
-        public static Bitmap adjustSaturation(Bitmap image, float saturation)
+        public static Bitmap AdjustSaturation(Bitmap image, float saturation)
         {
             float s =  saturation;
             float lumR = 0.3086F;
@@ -81,13 +81,109 @@ namespace project
 
         }
 
-       
+
+        public static Image SuggestedFilter(UserImage userImage) 
+        {
+            var color = userImage.MainColor;
+            
+            var category = userImage.Category;
+
+            Bitmap suggested = new Bitmap(userImage.BM);
+
+            if (category == "Nature")
+            {
+                
+
+                int r = color.R;
+                int g = color.G;
+                int b = color.B;
+
+                List<int> RGB = new List<int> { r, g, b };
+                int maxIndex = RGB.IndexOf(RGB.Max());
+
+                if (maxIndex == 0)
+                {
+                    ColorMatrix ColMat = new ColorMatrix(new float[][]
+                    {
+                        new float[]{ 3,0,0,0,0},  //R red scaling factor 
+                        new float[]{ 0,2,0,0,0},  //G green scaling factor
+                        new float[]{ 0,0,1,0,0},  //B blue scaling factor
+                        new float[]{ 0,0,0,1,0},  //A alpha scaling factor
+                        new float[]{ 0,0,0,0,1},  //W translations
+
+
+                    });
+
+                    suggested = ApplyColorMatrix(suggested, ColMat);
+                }
+                else if (maxIndex == 1)
+                {
+                    ColorMatrix ColMat = new ColorMatrix(new float[][]
+                    {
+                        new float[]{ 1,0,0,0,0},  //R red scaling factor 
+                        new float[]{ 0,3,0,0,0},  //G green scaling factor
+                        new float[]{ 0,0,1,0,0},  //B blue scaling factor
+                        new float[]{ 0,0,0,1,0},  //A alpha scaling factor
+                        new float[]{ 0,0,0,0,1},  //W translations
+
+
+                    });
+
+                    suggested = ApplyColorMatrix(suggested, ColMat);
+                }
+                else
+                {
+                    ColorMatrix ColMat = new ColorMatrix(new float[][]
+                    {
+                        new float[]{ 1,0,0,0,0},  //R red scaling factor 
+                        new float[]{ 0,1.5f,0,0,0},  //G green scaling factor
+                        new float[]{ 0,0,2,0,0},  //B blue scaling factor
+                        new float[]{ 0,0,0,1,0},  //A alpha scaling factor
+                        new float[]{ 0,0,0,0,1},  //W translations
+
+
+                    });
+
+                    suggested = ApplyColorMatrix(suggested, ColMat);
+                   suggested =  AdjustSaturation(suggested,5);
+                }
+               
+                
+            }
+            else if (category == "Urban")
+            {
+
+                //sharpness?
+                // darker 
+
+                ColorMatrix ColMat = new ColorMatrix(new float[][]
+                 {
+                new float[]{ 0,0,0,0,0},  //R
+                new float[]{ 0,0,0,0,0},  //G
+                new float[]{ 0,0,0,0,0},  //B
+                new float[]{ 0,0,0,1,0},  //A
+                new float[]{ 0,0,0,0,1},  //W
+
+
+                 });
+
+                suggested = ApplyColorMatrix(suggested, ColMat);
+            }
+
+            return suggested;
+          
+        }
+
 
         public static Image RotateImage90CW(Image img)
         {
             Image rotated = img;
 
-            rotated.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            if (img != null)
+            {
+                rotated.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
+            
 
             return  rotated;
 
@@ -239,6 +335,10 @@ namespace project
 
             return outputBM;
         }
+
+
+
+
 
     }
 }

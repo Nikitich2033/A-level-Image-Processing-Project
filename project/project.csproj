@@ -186,6 +186,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StartUpWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartUpWindow.Designer.cs">
+      <DependentUpon>StartUpWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageData.cs" />
     <Compile Include="ImagePrediction.cs" />
     <Compile Include="LockedBitmap.cs" />
@@ -214,6 +220,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StartUpWindow.resx">
+      <DependentUpon>StartUpWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\UserImage.datasource" />
     <None Include="Properties\Settings.settings">

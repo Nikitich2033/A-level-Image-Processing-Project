@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="project.ImageData">
+    <Position X="9.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImageData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.ImageFilter">
+    <Position X="2.75" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAEIAAAQAICADAAABAAAAAIAAAACAAAAACAAAA=</HashCode>
+      <FileName>ImageFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.ImageManipulation">
+    <Position X="4.5" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABEAAAAA=</HashCode>
+      <FileName>ImageManipulation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.ImagePrediction">
+    <Position X="9" Y="6.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImagePrediction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.LockedBitmap">
+    <Position X="0.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABABAABAAAIAEAAAABBEAAAAAAAAAgAEAAAAgAAAA=</HashCode>
+      <FileName>LockedBitmap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.MachineLearning">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="project.MachineLearning.InceptionSettings" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MachineLearning.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAICAAACCAAAAAAAACAAAARgAAAACAAAAgAAAA=</HashCode>
+      <FileName>MachineLearning.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.MainWindow" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wSEAAxRMCSEASBCDARCBQIjSIeg5gUCo+AAgQiFQgFM=</HashCode>
+      <FileName>MainWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.Program">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.StartUpWindow" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAIAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>StartUpWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="project.UserImage">
+    <Position X="5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAgAAAEAAAAEAAAIAAAUAQAAAEAAAAAAAEAAAECAA=</HashCode>
+      <FileName>UserImage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

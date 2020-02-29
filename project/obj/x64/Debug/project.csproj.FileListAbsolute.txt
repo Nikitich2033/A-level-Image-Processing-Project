@@ -80,3 +80,4 @@ C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.Security.AccessControl.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.Security.Principal.Windows.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\CpuMathNative.dll
+C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.StartUpWindow.resources

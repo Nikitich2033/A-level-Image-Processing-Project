@@ -15,6 +15,7 @@ namespace project
     {
         public string filepath { get; set; }
         public string Category { get; set; }
+        public Color MainColor { get; set; }
 
         static List<string> categories = new List<string>();
         public int brightness { get; set; }

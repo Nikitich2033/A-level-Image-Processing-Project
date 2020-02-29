@@ -17,8 +17,8 @@ namespace project
         static readonly string _imagesFolder = Path.Combine(_assetsPath, "images");
         static readonly string _trainTagsTsv = Path.Combine(_imagesFolder, "tags.tsv");
         static readonly string _testTagsTsv = Path.Combine(_imagesFolder, "test-tags.tsv");
-      //  static public string _predictSingleImage = Path.Combine(_imagesFolder, "woods.jpg");
-        static public string _predictSingleImage ;
+        //static public string _predictSingleImage = Path.Combine(_imagesFolder, "tostado.jpg");
+       static public string _predictSingleImage ;
         static readonly string _inceptionTensorFlowModel = Path.Combine(_assetsPath, "inception", "tensorflow_inception_graph.pb");
         //https://stackoverflow.com/questions/51278213/what-is-the-use-of-a-pb-file-in-tensorflow-and-how-does-it-work
 

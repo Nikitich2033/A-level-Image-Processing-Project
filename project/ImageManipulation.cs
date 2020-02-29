@@ -142,74 +142,74 @@ namespace project
         }
 
        
-        public static Bitmap FindObjects(Bitmap image) 
-        {
-            // create instance of blob counter
-            BlobCounter blobCounter = new BlobCounter();
-            // process input image
-            blobCounter.ProcessImage(image);
-            // get information about detected objects
-            Blob[] blobs = blobCounter.GetObjectsInformation();
+        //public static Bitmap FindObjects(Bitmap image) 
+        //{
+        //    // create instance of blob counter
+        //    BlobCounter blobCounter = new BlobCounter();
+        //    // process input image
+        //    blobCounter.ProcessImage(image);
+        //    // get information about detected objects
+        //    Blob[] blobs = blobCounter.GetObjectsInformation();
 
-            var objectcount = 0;
+        //    var objectcount = 0;
 
-            foreach (var item in blobs)
-            {
-                objectcount++;
-            }
+        //    foreach (var item in blobs)
+        //    {
+        //        objectcount++;
+        //    }
 
-            //draw the detected shapes on the image
+        //    //draw the detected shapes on the image
 
-            SimpleShapeChecker shapeChecker = new SimpleShapeChecker();
-            Pen redPen = new Pen(Color.Red, 5);
-            Graphics g = Graphics.FromImage(image);
-
-           
-
-            for (int i = 0, n = blobs.Length; i < n; i++)
-            {
-                List<IntPoint> edgePoints = blobCounter.GetBlobsEdgePoints(blobs[i]);
-                List<IntPoint> corners = PointsCloud.FindQuadrilateralCorners(edgePoints);
-
-                g.DrawPolygon(redPen, corners.Select(p => new System.Drawing.Point(p.X, p.Y)).ToArray());
-            }
-
-            MessageBox.Show(objectcount.ToString(), "Number of objects");
-
-           return new Bitmap(50,50,g);
-        }
-
-        public static void FindRect(Bitmap image)
-        {
-           
-            // create an instance of blob counter algorithm
-            BlobCounter bc = new BlobCounter();
-            // process binary image
-            bc.ProcessImage(image);
-            Rectangle[] rects = bc.GetObjectsRectangles();
-            // process blobs
-
-            var rectnum = 0;
-
-            foreach (Rectangle rect in rects)
-            {
-                rectnum++;
-            }
+        //    SimpleShapeChecker shapeChecker = new SimpleShapeChecker();
+        //    Pen redPen = new Pen(Color.Red, 5);
+        //    Graphics g = Graphics.FromImage(image);
 
            
-            MessageBox.Show(rectnum.ToString(),"Number of rectangles");
 
-        }
+        //    for (int i = 0, n = blobs.Length; i < n; i++)
+        //    {
+        //        List<IntPoint> edgePoints = blobCounter.GetBlobsEdgePoints(blobs[i]);
+        //        List<IntPoint> corners = PointsCloud.FindQuadrilateralCorners(edgePoints);
 
-        //http://www.aforgenet.com/framework/docs/html/372f7aee-9ce1-a2a2-395a-2de015241b8c.htm
-        public static Bitmap DisplayEdges(Bitmap bitmap) 
-        {
-            HomogenityEdgeDetector edgeFilter = new HomogenityEdgeDetector();
-            Bitmap start = AForge.Imaging.Image.Clone(bitmap,PixelFormat.Format24bppRgb);
-            return start;
+        //        g.DrawPolygon(redPen, corners.Select(p => new System.Drawing.Point(p.X, p.Y)).ToArray());
+        //    }
+
+        //    MessageBox.Show(objectcount.ToString(), "Number of objects");
+
+        //   return new Bitmap(50,50,g);
+        //}
+
+        //public static void FindRect(Bitmap image)
+        //{
+           
+        //    // create an instance of blob counter algorithm
+        //    BlobCounter bc = new BlobCounter();
+        //    // process binary image
+        //    bc.ProcessImage(image);
+        //    Rectangle[] rects = bc.GetObjectsRectangles();
+        //    // process blobs
+
+        //    var rectnum = 0;
+
+        //    foreach (Rectangle rect in rects)
+        //    {
+        //        rectnum++;
+        //    }
+
+           
+        //    MessageBox.Show(rectnum.ToString(),"Number of rectangles");
+
+        //}
+
+        ////http://www.aforgenet.com/framework/docs/html/372f7aee-9ce1-a2a2-395a-2de015241b8c.htm
+        //public static Bitmap DisplayEdges(Bitmap bitmap) 
+        //{
+        //    HomogenityEdgeDetector edgeFilter = new HomogenityEdgeDetector();
+        //    Bitmap start = AForge.Imaging.Image.Clone(bitmap,PixelFormat.Format24bppRgb);
+        //    return start;
         
         
-        }
+        //}
 
 
 

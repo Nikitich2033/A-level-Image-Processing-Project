@@ -19,6 +19,7 @@ using System.Threading;
 
 using Microsoft.ML;
 using Microsoft.ML.Data;
+using System.Diagnostics;
 
 namespace project
 {
@@ -56,6 +57,8 @@ namespace project
             // userImages = new List<UserImage>();
             userImages = UploadedImageBitmap.check_JSON();
 
+            
+
         }
 
 
@@ -68,6 +71,7 @@ namespace project
                 UploadedImageBitmap.BM = new Bitmap(opnfd.FileName);
                 UploadedImageBitmap.startBM = UploadedImageBitmap.BM;
                 pictureBox1.Image = UploadedImageBitmap.BM;
+                UploadedImageBitmap.filepath = Path.GetFullPath(opnfd.FileName);
             }
 
             //get the values for trackbars from JSON
@@ -79,7 +83,7 @@ namespace project
                     trackBar1.Value = image.brightness;
                     trackBar2.Value = image.contrast;
                     trackBar3.Value = image.saturation;
-
+                    
                     
                     UpdateTrackBarTextboxes(image);
                     UpdateUserImageObject(image,UploadedImageBitmap);
@@ -136,7 +140,7 @@ namespace project
 
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.startBM, trackBar1.Value);
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.BM,UploadedImageBitmap.contrast);
-            UploadedImageBitmap.BM = ImageFilter.adjustSaturation(UploadedImageBitmap.BM, UploadedImageBitmap.saturation);
+            UploadedImageBitmap.BM = ImageFilter.AdjustSaturation(UploadedImageBitmap.BM, UploadedImageBitmap.saturation);
 
             pictureBox1.Image = UploadedImageBitmap.BM;
 
@@ -149,7 +153,7 @@ namespace project
         private void ContrastAdjustment(object sender, EventArgs e) {
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.startBM, trackBar2.Value);
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.BM, UploadedImageBitmap.brightness);
-            UploadedImageBitmap.BM = ImageFilter.adjustSaturation(UploadedImageBitmap.BM, UploadedImageBitmap.saturation);
+            UploadedImageBitmap.BM = ImageFilter.AdjustSaturation(UploadedImageBitmap.BM, UploadedImageBitmap.saturation);
 
             pictureBox1.Image = UploadedImageBitmap.BM;
 
@@ -163,7 +167,7 @@ namespace project
 
         private void SaturationAdjustment(object sender, EventArgs e)
         {
-            UploadedImageBitmap.BM = ImageFilter.adjustSaturation(UploadedImageBitmap.startBM, trackBar3.Value);
+            UploadedImageBitmap.BM = ImageFilter.AdjustSaturation(UploadedImageBitmap.startBM, trackBar3.Value);
 
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.BM, UploadedImageBitmap.brightness);
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.BM, UploadedImageBitmap.contrast);
@@ -180,17 +184,21 @@ namespace project
 
         private void Grayscale_click(object sender, EventArgs e)
         {
-            pictureBox1.Image = ImageFilter.DrawAsGrayscale(UploadedImageBitmap.BM);
+            UploadedImageBitmap.BM = ImageFilter.DrawAsGrayscale(UploadedImageBitmap.BM);
+            pictureBox1.Image = UploadedImageBitmap.BM;
         }
 
         private void Sepia_click(object sender, EventArgs e)
         {
-            pictureBox1.Image = ImageFilter.DrawAsSepiaTone(UploadedImageBitmap.BM);
+            
+            UploadedImageBitmap.BM = ImageFilter.DrawAsSepiaTone(UploadedImageBitmap.BM);
+            pictureBox1.Image = UploadedImageBitmap.BM;
         }
 
         private void Negative_click(object sender, EventArgs e)
         {
-            pictureBox1.Image = ImageFilter.DrawAsNegative(UploadedImageBitmap.BM);
+            UploadedImageBitmap.BM = ImageFilter.DrawAsNegative(UploadedImageBitmap.BM);
+            pictureBox1.Image = UploadedImageBitmap.BM;
 
         }
 
@@ -210,6 +218,7 @@ namespace project
            
         }
 
+
         private void DisplayMostReoccuringColor() 
         {
 
@@ -225,6 +234,9 @@ namespace project
             pictureBox4.Image =  image;
 
             textBox6.Text = color.ToString();
+
+            UploadedImageBitmap.MainColor = color;
+
         }
 
 
@@ -253,22 +265,6 @@ namespace project
             if (pictureBox1.Image != null) { pictureBox1.Image.Dispose(); }
             pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
 
-        }
-
-
-        private void FindRectanglesButton(object sender, EventArgs e)
-        {
-            ImageManipulation.FindRect(UploadedImageBitmap.BM);
-        }
-
-        private void FindObjectsButton(object sender, EventArgs e)
-        {
-           pictureBox1.Image =  ImageManipulation.FindObjects(UploadedImageBitmap.BM);
-        }
-
-        private void DisplyaEdgesButton(object sender, EventArgs e)
-        {
-            pictureBox1.Image =  ImageManipulation.DisplayEdges(UploadedImageBitmap.BM);
         }
 
         private void picbox2_upload(object sender, EventArgs e)
@@ -369,7 +365,8 @@ namespace project
             textBox1.Text = Convert.ToString(image.brightness);
             textBox2.Text = Convert.ToString(image.contrast);
             textBox3.Text = Convert.ToString(image.saturation);
-
+            textBox6.Text = Convert.ToString(image.MainColor);
+            textBox7.Text = image.Category;
         }
 
         public void UpdateUserImageObject(UserImage image, UserImage UploadedImage)
@@ -378,7 +375,8 @@ namespace project
             UploadedImage.contrast = image.contrast;
             UploadedImage.saturation = image.saturation;
             UploadedImage.filepath = image.filepath;
-            
+            UploadedImage.MainColor = image.MainColor;
+            UploadedImage.Category = image.Category;
         
         }
 
@@ -388,20 +386,34 @@ namespace project
             MLContext mlContext = new MLContext();
             ITransformer model = MachineLearning.GenerateModel(mlContext);
             MachineLearning._predictSingleImage = UploadedImageBitmap.filepath;
+
             textBox7.Text =  MachineLearning.ClassifySingleImage(mlContext, model)[0];
 
             UploadedImageBitmap.Category = MachineLearning.ClassifySingleImage(mlContext, model)[1];
-          //image category = prediction.PredictedLabelValue
+            
         }
 
-        private void recurringColorBox(object sender, EventArgs e)
+        private void recurringColorBoxClick(object sender, EventArgs e)
         {
             DisplayMostReoccuringColor();
+
+        }
+
+        private void openProgramDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"D:\Images");
+        }
+
+        private void SuggestedFilterBoxClick(object sender, EventArgs e)
+        {
+           
+            pictureBox5.Image = ImageFilter.SuggestedFilter(UploadedImageBitmap);
         }
 
         private void Rotate90CW(object sender, EventArgs e)
-        {
-           pictureBox1.Image =  ImageFilter.RotateImage90CW(pictureBox1.Image);
+        {  
+            UploadedImageBitmap.BM = new Bitmap( ImageFilter.RotateImage90CW(pictureBox1.Image));
+            pictureBox1.Image = UploadedImageBitmap.BM;
         }
 
 
@@ -413,6 +425,8 @@ namespace project
 
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
+
+        
 
         // Start selecting the rectangle.
         private void picOriginal_MouseDown(object sender, MouseEventArgs e)
