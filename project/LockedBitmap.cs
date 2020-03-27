@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
+
 
 namespace project
 {
    
-    //
-    //https://efundies.com/csharp-load-image/
-    //
-    
-
     public class LockedBitmap
     {
         readonly Bitmap sourceBM = null;

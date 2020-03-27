@@ -7,20 +7,17 @@ using Microsoft.ML.Data;
 
 namespace project
 {
-    //https://docs.microsoft.com/en-us/dotnet/machine-learning/tutorials/image-classification
+    
     class MachineLearning
     {
-        //static readonly string _assetsPath = Path.Combine(Environment.CurrentDirectory, "assets");
-
-        static readonly string _assetsPath = Path.Combine( @"D:\Images\" , "assets");
-        
+    
+        static readonly string _assetsPath = Path.Combine( @"D:\Images\" , "assets"); 
         static readonly string _imagesFolder = Path.Combine(_assetsPath, "images");
         static readonly string _trainTagsTsv = Path.Combine(_imagesFolder, "tags.tsv");
         static readonly string _testTagsTsv = Path.Combine(_imagesFolder, "test-tags.tsv");
-        //static public string _predictSingleImage = Path.Combine(_imagesFolder, "tostado.jpg");
-       static public string _predictSingleImage ;
+        static public string _predictSingleImage ;
         static readonly string _inceptionTensorFlowModel = Path.Combine(_assetsPath, "inception", "tensorflow_inception_graph.pb");
-        //https://stackoverflow.com/questions/51278213/what-is-the-use-of-a-pb-file-in-tensorflow-and-how-does-it-work
+      
 
       
         private struct InceptionSettings
@@ -34,15 +31,20 @@ namespace project
 
         public static ITransformer GenerateModel(MLContext mlContext)
         {
-            IEstimator<ITransformer> pipeline = mlContext.Transforms.LoadImages(outputColumnName: "input", imageFolder: _imagesFolder, inputColumnName: nameof(ImageData.ImagePath))
+            IEstimator<ITransformer> pipeline = mlContext.Transforms.LoadImages(outputColumnName: "input", imageFolder: _imagesFolder, 
+                                                                                inputColumnName: nameof(ImageData.ImagePath))
 
                 // The image transforms transform the images into the model's expected format.
-                .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input", imageWidth: InceptionSettings.ImageWidth, imageHeight: InceptionSettings.ImageHeight, inputColumnName: "input"))
-                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input", interleavePixelColors: InceptionSettings.ChannelsLast, offsetImage: InceptionSettings.Mean))
+                .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input", imageWidth: InceptionSettings.ImageWidth, 
+                                                            imageHeight: InceptionSettings.ImageHeight, inputColumnName: "input"))
+                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input", interleavePixelColors: InceptionSettings.ChannelsLast, 
+                                                            offsetImage: InceptionSettings.Mean))
                 .Append(mlContext.Model.LoadTensorFlowModel(_inceptionTensorFlowModel).
-                 ScoreTensorFlowModel(outputColumnNames: new[] { "softmax2_pre_activation" }, inputColumnNames: new[] { "input" }, addBatchDimensionInput: true))
+                 ScoreTensorFlowModel(outputColumnNames: new[] { "softmax2_pre_activation" }, inputColumnNames: new[] { "input" }, 
+                                                             addBatchDimensionInput: true))
                 .Append(mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "LabelKey", inputColumnName: "Label"))
-                .Append(mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(labelColumnName: "LabelKey", featureColumnName: "softmax2_pre_activation"))
+                .Append(mlContext.MulticlassClassification.Trainers.LbfgsMaximumEntropy(labelColumnName: "LabelKey", 
+                                                        featureColumnName: "softmax2_pre_activation"))
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabelValue", "PredictedLabel"))
                 .AppendCacheCheckpoint(mlContext);
 
@@ -54,7 +56,7 @@ namespace project
 
             // Create an IEnumerable for the predictions for displaying results
             IEnumerable<ImagePrediction> imagePredictionData = mlContext.Data.CreateEnumerable<ImagePrediction>(predictions, true);
-           // DisplayResults(imagePredictionData);
+           
 
             MulticlassClassificationMetrics metrics =
              mlContext.MulticlassClassification.Evaluate(predictions,
@@ -73,7 +75,8 @@ namespace project
         {
             foreach (ImagePrediction prediction in imagePredictionData)
             {
-                Console.WriteLine($"Image: {Path.GetFileName(prediction.ImagePath)} predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ");
+                Console.WriteLine($"Image: {Path.GetFileName(prediction.ImagePath)} " +
+                    $"predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ");
             }
         }
 
@@ -88,7 +91,8 @@ namespace project
             var predictor = mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
             var prediction = predictor.Predict(imageData);
 
-            string output = $"Image: {Path.GetFileName(imageData.ImagePath)} predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ";
+            string output = $"Image: {Path.GetFileName(imageData.ImagePath)} " +
+                                      $"predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ";
             string[] result = new string[2] { output, prediction.PredictedLabelValue };
             return result;
         }

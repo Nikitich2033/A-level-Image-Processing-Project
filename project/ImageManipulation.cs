@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using AForge.Imaging;
-using AForge.Imaging.Filters;
-using System.Windows.Forms;
-using AForge.Math.Geometry;
-using AForge.Video;
-using AForge.Video.DirectShow;
-using AForge;
+using System.Drawing; 
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
@@ -141,86 +132,8 @@ namespace project
 
         }
 
-       
-        //public static Bitmap FindObjects(Bitmap image) 
-        //{
-        //    // create instance of blob counter
-        //    BlobCounter blobCounter = new BlobCounter();
-        //    // process input image
-        //    blobCounter.ProcessImage(image);
-        //    // get information about detected objects
-        //    Blob[] blobs = blobCounter.GetObjectsInformation();
-
-        //    var objectcount = 0;
-
-        //    foreach (var item in blobs)
-        //    {
-        //        objectcount++;
-        //    }
-
-        //    //draw the detected shapes on the image
-
-        //    SimpleShapeChecker shapeChecker = new SimpleShapeChecker();
-        //    Pen redPen = new Pen(Color.Red, 5);
-        //    Graphics g = Graphics.FromImage(image);
-
-           
-
-        //    for (int i = 0, n = blobs.Length; i < n; i++)
-        //    {
-        //        List<IntPoint> edgePoints = blobCounter.GetBlobsEdgePoints(blobs[i]);
-        //        List<IntPoint> corners = PointsCloud.FindQuadrilateralCorners(edgePoints);
-
-        //        g.DrawPolygon(redPen, corners.Select(p => new System.Drawing.Point(p.X, p.Y)).ToArray());
-        //    }
-
-        //    MessageBox.Show(objectcount.ToString(), "Number of objects");
-
-        //   return new Bitmap(50,50,g);
-        //}
-
-        //public static void FindRect(Bitmap image)
-        //{
-           
-        //    // create an instance of blob counter algorithm
-        //    BlobCounter bc = new BlobCounter();
-        //    // process binary image
-        //    bc.ProcessImage(image);
-        //    Rectangle[] rects = bc.GetObjectsRectangles();
-        //    // process blobs
-
-        //    var rectnum = 0;
-
-        //    foreach (Rectangle rect in rects)
-        //    {
-        //        rectnum++;
-        //    }
-
-           
-        //    MessageBox.Show(rectnum.ToString(),"Number of rectangles");
-
-        //}
-
-        ////http://www.aforgenet.com/framework/docs/html/372f7aee-9ce1-a2a2-395a-2de015241b8c.htm
-        //public static Bitmap DisplayEdges(Bitmap bitmap) 
-        //{
-        //    HomogenityEdgeDetector edgeFilter = new HomogenityEdgeDetector();
-        //    Bitmap start = AForge.Imaging.Image.Clone(bitmap,PixelFormat.Format24bppRgb);
-        //    return start;
-        
-        
-        //}
-
-
-
-        //https://softwarebydefault.com/2013/05/11/image-edge-detection/comment-page-1/
-        //Convolution is a simple mathematical operation which is fundamental to many common image processing operators. 
-        //Convolution provides a way of `multiplying together’ two arrays of numbers, generally of different sizes, but of the same dimensionality, 
-        //to produce a third array of numbers of the same dimensionality. This can be used in image processing to implement operators whose output pixel 
-        //values are simple linear combinations of certain input pixel values.
-        //In an image processing context, one of the input arrays is normally just a graylevel image.The second array is usually much smaller, 
-        //and is also two-dimensional(although it may be just a single pixel thick), and is known as the kernel.
-        public static Bitmap ConvolutionFilter(Bitmap sourceBitmap, double[,] filterMatrix, double factor,  int bias, bool grayscale)
+        public static Bitmap ConvolutionFilter(Bitmap sourceBitmap, double[,] filterMatrix, double factor,  
+                                                int bias, bool grayscale)
         {
             BitmapData sourceData =
                            sourceBitmap.LockBits(new Rectangle(0, 0,

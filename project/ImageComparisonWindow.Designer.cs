@@ -1,6 +1,6 @@
 ﻿namespace project
 {
-    partial class ImageComparison
+    partial class ImageComparisonWindow
     {
         /// <summary>
         /// Required designer variable.

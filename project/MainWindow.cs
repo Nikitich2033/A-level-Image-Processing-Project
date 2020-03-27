@@ -1,5 +1,4 @@
-﻿
-using AForge.Video;
+﻿using AForge.Video;
 using AForge.Video.DirectShow;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,6 @@ namespace project
     {
        
         private UserImage UploadedImageBitmap { get; set; }
-       // public Bitmap WorkingOnImage { get; set; }
 
         public FilterInfoCollection videoDevices { get; set; }
 
@@ -34,13 +32,11 @@ namespace project
         {
 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
-           // pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-           
+
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            UploadedImageBitmap = new UserImage();
-            // userImages = new List<UserImage>();
+            UploadedImageBitmap = new UserImage();           
             userImages = UploadedImageBitmap.check_JSON();
 
             
@@ -76,7 +72,7 @@ namespace project
                     index = userImages.IndexOf(image);
                     
                 }
-                //suserImages.RemoveAt(index);
+               
             }
 
         
@@ -122,7 +118,6 @@ namespace project
 
         private void BrightnessAdjustment(object sender, EventArgs e) {
             
-            //temporary file with the starting image
 
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.startBM, trackBar1.Value);
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.BM,UploadedImageBitmap.contrast);
@@ -336,7 +331,7 @@ namespace project
 
         private void OpenComparison(object sender, EventArgs e)
         {
-            var window = new ImageComparison();
+            var window = new ImageComparisonWindow();
             
             window.ShowDialog();
             

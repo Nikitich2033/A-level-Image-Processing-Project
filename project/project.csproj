@@ -186,11 +186,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageComparison.cs">
+    <Compile Include="ImageComparisonWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ImageComparison.Designer.cs">
-      <DependentUpon>ImageComparison.cs</DependentUpon>
+    <Compile Include="ImageComparisonWindow.Designer.cs">
+      <DependentUpon>ImageComparisonWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="StartUpWindow.cs">
       <SubType>Form</SubType>
@@ -213,8 +213,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ImageManipulation.cs" />
     <Compile Include="UserImage.cs" />
-    <EmbeddedResource Include="ImageComparison.resx">
-      <DependentUpon>ImageComparison.cs</DependentUpon>
+    <EmbeddedResource Include="ImageComparisonWindow.resx">
+      <DependentUpon>ImageComparisonWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>

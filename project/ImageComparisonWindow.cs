@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace project
 {
-    public partial class ImageComparison : Form
+    public partial class ImageComparisonWindow : Form
     {
-        public ImageComparison()
+        public ImageComparisonWindow()
         {
             InitializeComponent();
         }
@@ -60,7 +55,8 @@ namespace project
                 {
 
                     pictureBox2.Image = new Bitmap(Filepath);
-                    textBox1.Text = ImageManipulation.CompareImages(new Bitmap(pictureBox1.Image), new Bitmap(pictureBox2.Image)).ToString();
+                    textBox1.Text = ImageManipulation.CompareImages(new Bitmap(pictureBox1.Image), 
+                        new Bitmap(pictureBox2.Image)).ToString();
 
                     await Task.Delay(1000);
 
@@ -83,9 +79,6 @@ namespace project
             bool grayscale = true;
             Bitmap BM1 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox1.Image), grayscale);
             Bitmap BM2 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox2.Image), grayscale);
-
-            // ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.FromArgb(0, 0, 0, 0));
-            //ImageFilter.ReplaceColor(BM2, Color.FromArgb(0, 0, 0), Color.FromArgb(0, 0, 0, 0));
 
             ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
             ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
