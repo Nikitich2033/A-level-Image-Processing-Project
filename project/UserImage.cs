@@ -45,7 +45,6 @@ namespace project
             saturation = 1;
            
 
-          
         }
 
         public void Display() 
@@ -84,7 +83,6 @@ namespace project
             string json = JsonConvert.SerializeObject(Images.ToArray(), Formatting.Indented);
             File.WriteAllText(@"D:\Images\data.json", json);
             
-
         }
 
     }

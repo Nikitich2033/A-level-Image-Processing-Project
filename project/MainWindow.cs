@@ -1,24 +1,13 @@
 ﻿
 using AForge.Video;
 using AForge.Video.DirectShow;
-using AForge.Imaging;
-using AForge.Imaging.Filters;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.WindowsAPICodePack.Dialogs;
-using System.Threading;
-
 using Microsoft.ML;
-using Microsoft.ML.Data;
 using System.Diagnostics;
 
 namespace project
@@ -46,10 +35,7 @@ namespace project
 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
            // pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
-            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+           
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
             videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
@@ -267,60 +253,7 @@ namespace project
 
         }
 
-        private void picbox2_upload(object sender, EventArgs e)
-        {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-
-                pictureBox2.Image = new Bitmap(opnfd.FileName);
-
-            }
-    
-        }
-
-        private void picbox3_upload(object sender, EventArgs e)
-        {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp";
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-
-                pictureBox3.Image = new Bitmap(opnfd.FileName);
-
-            }
-
-        }
-
-        private void CompareButon(object sender, EventArgs e)
-        {
-            Bitmap BM1 = new Bitmap(pictureBox2.Image);
-            Bitmap BM2 = new Bitmap(pictureBox3.Image);
-
-           textBox4.Text =  ImageManipulation.CompareImages(BM1, BM2).ToString();
-
-        }
-
-        private void compareUsingLaplacian(object sender, EventArgs e)
-        {
-            //could outline the white outline using a pen tool and replace a bitmap with that sketch
-            bool grayscale = true;
-            Bitmap BM1 = ImageFilter.Laplacian3x3Filter(new Bitmap (pictureBox2.Image), grayscale);
-            Bitmap BM2 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox3.Image), grayscale);
-
-            // ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.FromArgb(0, 0, 0, 0));
-            //ImageFilter.ReplaceColor(BM2, Color.FromArgb(0, 0, 0), Color.FromArgb(0, 0, 0, 0));
-
-            ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
-            ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
-
-            pictureBox2.Image = BM1;
-            pictureBox3.Image = BM2;
-
-            textBox4.Text = ImageManipulation.CompareImages(BM1, BM2).ToString();
-
-        }
+      
 
         private void White_Outline_Highlight(object sender, EventArgs e)
         {
@@ -331,33 +264,7 @@ namespace project
 
 
 
-        private async void UploadFolderCompareButton(object sender, EventArgs e)
-        {
-
-            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
-
-            folderDialog.InitialDirectory = "c:\\Users";
-            folderDialog.IsFolderPicker = true;
-
-            if (folderDialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                textBox5.Text = folderDialog.FileName;
-
-                string[] arrayOfImagePaths = Directory.GetFiles(folderDialog.FileName);
-
-                foreach (var Filepath in arrayOfImagePaths)
-                {
-                   
-                    pictureBox3.Image = new Bitmap(Filepath);
-                        textBox4.Text = ImageManipulation.CompareImages(new Bitmap(pictureBox2.Image), new Bitmap(pictureBox3.Image)).ToString();
-
-                    await Task.Delay(1000);
-
-                 
-                }
-            }
-
-        }
+    
 
         //when data is read from the JSON file
         public void UpdateTrackBarTextboxes(UserImage image)
@@ -408,6 +315,7 @@ namespace project
         {
            
             pictureBox5.Image = ImageFilter.SuggestedFilter(UploadedImageBitmap);
+            pictureBox1.Image = pictureBox5.Image;
         }
 
         private void Rotate90CW(object sender, EventArgs e)
@@ -426,7 +334,15 @@ namespace project
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
 
-        
+        private void OpenComparison(object sender, EventArgs e)
+        {
+            var window = new ImageComparison();
+            
+            window.ShowDialog();
+            
+        }
+
+
 
         // Start selecting the rectangle.
         private void picOriginal_MouseDown(object sender, MouseEventArgs e)

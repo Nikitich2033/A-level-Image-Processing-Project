@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-
 
 namespace project
 {
@@ -152,27 +147,43 @@ namespace project
             }
             else if (category == "Urban")
             {
+                 double factor = 1.0;
 
-                //sharpness?
-                // darker 
+                 int bias = 0;
+            // 3x3 Sharpening Filter
+                double[,] filterMatrix =
+                new double[,] { {  0, -1,  0, },
+                        { -1,  5, -1, },
+                        {  0, -1,  0, }, };
 
-                ColorMatrix ColMat = new ColorMatrix(new float[][]
-                 {
-                new float[]{ 0,0,0,0,0},  //R
-                new float[]{ 0,0,0,0,0},  //G
-                new float[]{ 0,0,0,0,0},  //B
-                new float[]{ 0,0,0,1,0},  //A
-                new float[]{ 0,0,0,0,1},  //W
+                suggested = ConvolutionFilter(suggested,filterMatrix,factor,bias,false);
 
 
-                 });
+           }
 
-                suggested = ApplyColorMatrix(suggested, ColMat);
+            else if (category == "Face")
+            {
+
+
+                double factor = 1.0 / 8.0;
+
+                int bias = 0;
+                // 5x5 Sharpening Filter
+                 double[,] filterMatrix =
+            new double[,] { { -1, -1, -1, -1, -1, },
+                        { -1,  2,  2,  2, -1, },
+                        { -1,  2,  8,  2,  1, },
+                        { -1,  2,  2,  2, -1, },
+                        { -1, -1, -1, -1, -1, }, };
+
+            suggested = ConvolutionFilter(suggested, filterMatrix, factor, bias, false);
             }
-
+                    
+      
             return suggested;
           
         }
+
 
 
         public static Image RotateImage90CW(Image img)
