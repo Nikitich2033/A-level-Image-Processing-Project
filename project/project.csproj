@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SciSharp.TensorFlow.Redist.2.1.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props" Condition="Exists('..\packages\SciSharp.TensorFlow.Redist.2.1.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props')" />
   <Import Project="..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.props" Condition="Exists('..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.props')" />
   <Import Project="..\packages\Microsoft.ML.CpuMath.1.5.0-preview\build\netstandard2.0\Microsoft.ML.CpuMath.props" Condition="Exists('..\packages\Microsoft.ML.CpuMath.1.5.0-preview\build\netstandard2.0\Microsoft.ML.CpuMath.props')" />
-  <Import Project="..\packages\SciSharp.TensorFlow.Redist.1.15.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props" Condition="Exists('..\packages\SciSharp.TensorFlow.Redist.1.15.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,26 +65,11 @@
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
     </Reference>
-    <Reference Include="AForge.Controls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a8ac264d1dc6b9d9, processorArchitecture=MSIL">
-      <HintPath>..\packages\AForge.Controls.2.2.5\lib\AForge.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Genetic, Version=2.2.4.0, Culture=neutral, PublicKeyToken=4336634eeb41b69b, processorArchitecture=MSIL">
-      <HintPath>..\packages\AForge.Genetic.2.2.5\lib\AForge.Genetic.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
-      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
-      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
-    </Reference>
     <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
     </Reference>
     <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
-    </Reference>
-    <Reference Include="AForge.Vision, Version=2.2.5.0, Culture=neutral, PublicKeyToken=b612fa915eefaa06, processorArchitecture=MSIL">
-      <HintPath>..\packages\AForge.Vision.2.2.5\lib\AForge.Vision.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.11.3.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.11.3\lib\net45\Google.Protobuf.dll</HintPath>
@@ -253,10 +238,10 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\SciSharp.TensorFlow.Redist.1.15.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SciSharp.TensorFlow.Redist.1.15.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ML.CpuMath.1.5.0-preview\build\netstandard2.0\Microsoft.ML.CpuMath.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.CpuMath.1.5.0-preview\build\netstandard2.0\Microsoft.ML.CpuMath.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.targets'))" />
+    <Error Condition="!Exists('..\packages\SciSharp.TensorFlow.Redist.2.1.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SciSharp.TensorFlow.Redist.2.1.0\build\netstandard2.0\SciSharp.TensorFlow.Redist.props'))" />
   </Target>
   <Import Project="..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.targets" Condition="Exists('..\packages\Microsoft.ML.1.5.0-preview\build\netstandard2.0\Microsoft.ML.targets')" />
 </Project>

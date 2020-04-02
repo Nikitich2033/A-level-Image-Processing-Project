@@ -2,14 +2,9 @@ C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\project.exe.config
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\project.exe
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\project.pdb
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Controls.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.dll
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Genetic.dll
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Imaging.dll
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Math.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Video.DirectShow.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Video.dll
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Vision.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Google.Protobuf.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Microsoft.ML.Core.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Microsoft.ML.CpuMath.dll
@@ -38,13 +33,8 @@ C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.Threading.Tasks.Dataflow.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\TensorFlow.NET.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.xml
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Controls.xml
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Genetic.xml
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Imaging.xml
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Math.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Video.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Video.DirectShow.xml
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\AForge.Vision.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Google.Protobuf.pdb
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Google.Protobuf.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\Microsoft.ML.Core.xml
@@ -74,14 +64,12 @@ C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.csproj.CopyComplete
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.exe
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.pdb
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\tensorflow.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.CodeDom.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.IO.FileSystem.AccessControl.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.Security.AccessControl.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\System.Security.Principal.Windows.xml
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\CpuMathNative.dll
 C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.StartUpWindow.resources
-C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.ImageComparison.resources
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\obj\x64\Debug\project.csprojAssemblyReference.cache
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\obj\x64\Debug\project.ImageComparison.resources
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\obj\x64\Debug\project.MainWindow.resources
@@ -167,3 +155,5 @@ C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\bin\x64\Debug\S
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\bin\x64\Debug\System.Security.Principal.Windows.xml
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\bin\x64\Debug\System.Threading.Tasks.Dataflow.xml
 C:\Users\lyakh\OneDrive for Business\COMP\CSproject\code\project\obj\x64\Debug\project.csproj.CopyComplete
+C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\obj\x64\Debug\project.ImageComparisonWindow.resources
+C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Debug\tensorflow.dll

@@ -11,10 +11,7 @@ namespace project
         public static Bitmap AdjustBrightness(Bitmap image, float brightness)
         {
             float b = brightness / 2;
-            //apply the difference betweeen the 2 values of brightness 
-            // bring down the brightness of the image to the value chose on the trackbar
-
-            
+           
 
             ColorMatrix ColMat = new ColorMatrix(new float[][]
             {
@@ -32,7 +29,7 @@ namespace project
 
         public static Bitmap AdjustContrast(Bitmap image, float contrast)
         {
-            float value = contrast * 0.01f;
+            float value = (contrast * 0.01f);
             float c = 1 + value;
             float t = (1.0f - c) / 2.0f;
 
@@ -52,7 +49,7 @@ namespace project
 
         public static Bitmap AdjustSaturation(Bitmap image, float saturation)
         {
-            float s =  saturation;
+            float s =  saturation / 2;
             float lumR = 0.3086F;
             float lumG = 0.6094F;
             float lumB = 0.0820F;
@@ -87,7 +84,15 @@ namespace project
 
             if (category == "Nature")
             {
-                
+
+                // 3x3 Sharpening Filter
+                double factor = 1.0;
+                int bias = 0;
+
+                double[,] filterMatrix =
+                new double[,] { {  0, -1,  0, },
+                        { -1,  5, -1, },
+                        {  0, -1,  0, }, };
 
                 int r = color.R;
                 int g = color.G;
@@ -100,8 +105,8 @@ namespace project
                 {
                     ColorMatrix ColMat = new ColorMatrix(new float[][]
                     {
-                        new float[]{ 3,0,0,0,0},  //R red scaling factor 
-                        new float[]{ 0,2,0,0,0},  //G green scaling factor
+                        new float[]{ 1.8f,0,0,0,0},  //R red scaling factor 
+                        new float[]{ 0,1.5f,0,0,0},  //G green scaling factor
                         new float[]{ 0,0,1,0,0},  //B blue scaling factor
                         new float[]{ 0,0,0,1,0},  //A alpha scaling factor
                         new float[]{ 0,0,0,0,1},  //W translations
@@ -110,14 +115,15 @@ namespace project
                     });
 
                     suggested = ApplyColorMatrix(suggested, ColMat);
+                    suggested = ConvolutionFilter(suggested, filterMatrix, factor, bias, false);
                 }
                 else if (maxIndex == 1)
                 {
                     ColorMatrix ColMat = new ColorMatrix(new float[][]
                     {
                         new float[]{ 1,0,0,0,0},  //R red scaling factor 
-                        new float[]{ 0,3,0,0,0},  //G green scaling factor
-                        new float[]{ 0,0,1,0,0},  //B blue scaling factor
+                        new float[]{ 0,1.5f,0,0,0},  //G green scaling factor
+                        new float[]{ 0,0,1.3f,0,0},  //B blue scaling factor
                         new float[]{ 0,0,0,1,0},  //A alpha scaling factor
                         new float[]{ 0,0,0,0,1},  //W translations
 
@@ -125,6 +131,7 @@ namespace project
                     });
 
                     suggested = ApplyColorMatrix(suggested, ColMat);
+                    suggested = ConvolutionFilter(suggested, filterMatrix, factor, bias, false);
                 }
                 else
                 {
@@ -140,7 +147,8 @@ namespace project
                     });
 
                     suggested = ApplyColorMatrix(suggested, ColMat);
-                   suggested =  AdjustSaturation(suggested,5);
+                    suggested =  AdjustSaturation(suggested,5);
+                    suggested = ConvolutionFilter(suggested, filterMatrix, factor, bias, false);
                 }
                
                 
@@ -287,9 +295,6 @@ namespace project
             return result;
 
         }
-
-
-        //https://efundies.com/replace-a-color-in-an-image-with-csharp/
 
         // replace one color with another
         public static void ReplaceColor(Bitmap bmp, Color oldColor, Color newColor)

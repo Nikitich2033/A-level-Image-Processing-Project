@@ -16,11 +16,11 @@ namespace project
        
         private UserImage UploadedImageBitmap { get; set; }
 
-        public FilterInfoCollection videoDevices { get; set; }
+        public FilterInfoCollection VideoDevices { get; set; }
 
-        public VideoCaptureDevice videoSource { get; set; }
+        public VideoCaptureDevice VideoSource { get; set; }
         
-        public List<UserImage> userImages { get; set; }
+        public List<UserImage> UserImages { get; set; }
 
 
         public MainWindow()
@@ -33,11 +33,11 @@ namespace project
 
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
 
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            VideoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            VideoSource = new VideoCaptureDevice(VideoDevices[0].MonikerString);
+            VideoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
             UploadedImageBitmap = new UserImage();           
-            userImages = UploadedImageBitmap.check_JSON();
+            UserImages = UploadedImageBitmap.check_JSON();
 
             
 
@@ -46,8 +46,10 @@ namespace project
 
         private void UploadImage(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp";
+            OpenFileDialog opnfd = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp"
+            };
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
                 UploadedImageBitmap.BM = new Bitmap(opnfd.FileName);
@@ -58,7 +60,7 @@ namespace project
 
             //get the values for trackbars from JSON
             int index = 0;
-            foreach (var image in userImages)
+            foreach (var image in UserImages)
             {
                 if (image.filepath == opnfd.FileName)
                 {
@@ -69,7 +71,7 @@ namespace project
                     
                     UpdateTrackBarTextboxes(image);
                     UpdateUserImageObject(image,UploadedImageBitmap);
-                    index = userImages.IndexOf(image);
+                    index = UserImages.IndexOf(image);
                     
                 }
                
@@ -80,8 +82,7 @@ namespace project
 
         private void SaveImage(object sender, EventArgs e)
         {
-            SaveFileDialog savefiledg = new SaveFileDialog();
-            savefiledg.Filter = "Image Files| *.png;*.bmp;*.jpg;*.gif;";
+            SaveFileDialog savefiledg = new SaveFileDialog {Filter = "Image Files| *.png;*.bmp;*.jpg;*.gif;"};
             ImageFormat format = ImageFormat.Png;
 
             if (savefiledg.ShowDialog() == DialogResult.OK)
@@ -106,9 +107,9 @@ namespace project
 
                 pictureBox1.Image.Save(savefiledg.FileName, format);
                 UploadedImageBitmap.filepath = savefiledg.FileName;
-                userImages = UploadedImageBitmap.check_JSON();
-                userImages.Add(UploadedImageBitmap);
-                UploadedImageBitmap.update_JSON(userImages);
+                UserImages = UploadedImageBitmap.check_JSON();
+                UserImages.Add(UploadedImageBitmap);
+                UploadedImageBitmap.update_JSON(UserImages);
                 
             }
             
@@ -149,7 +150,6 @@ namespace project
         private void SaturationAdjustment(object sender, EventArgs e)
         {
             UploadedImageBitmap.BM = ImageFilter.AdjustSaturation(UploadedImageBitmap.startBM, trackBar3.Value);
-
             UploadedImageBitmap.BM = ImageFilter.AdjustBrightness(UploadedImageBitmap.BM, UploadedImageBitmap.brightness);
             UploadedImageBitmap.BM = ImageFilter.AdjustContrast(UploadedImageBitmap.BM, UploadedImageBitmap.contrast);
 
@@ -183,22 +183,6 @@ namespace project
 
         }
 
-        private void Laplacian_3x3(object sender, EventArgs e)
-        {
-            bool grayscale = false;
-            UploadedImageBitmap.BM = ImageFilter.Laplacian3x3Filter(UploadedImageBitmap.BM, grayscale);
-            pictureBox1.Image = UploadedImageBitmap.BM;
-        }
-
-        private void ReplaceColorButton(object sender, EventArgs e)
-        {
-
-           ImageFilter.ReplaceColor(UploadedImageBitmap.BM, Color.FromArgb(0, 0, 0), Color.Red);
-            
-           pictureBox1.Image = UploadedImageBitmap.BM;
-           
-        }
-
 
         private void DisplayMostReoccuringColor() 
         {
@@ -225,7 +209,7 @@ namespace project
 
         private void Start_Click(object sender, EventArgs e)
         {
-            videoSource.Start();
+            VideoSource.Start();
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -236,7 +220,7 @@ namespace project
             if (UploadedImageBitmap.startBM != null) { UploadedImageBitmap.startBM.Dispose(); }
             UploadedImageBitmap.startBM = UploadedImageBitmap.BM;
 
-            videoSource.Stop();
+            VideoSource.Stop();
            
         }
 
@@ -246,15 +230,6 @@ namespace project
             if (pictureBox1.Image != null) { pictureBox1.Image.Dispose(); }
             pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
 
-        }
-
-      
-
-        private void White_Outline_Highlight(object sender, EventArgs e)
-        {
-           
-            var tempBM = ImageFilter.DrawOutlineFromLaplacian(UploadedImageBitmap.BM, Color.FromArgb(255, 255, 255), Color.Red);
-            pictureBox1.Image = tempBM;
         }
 
 
@@ -337,8 +312,6 @@ namespace project
             
         }
 
-
-
         // Start selecting the rectangle.
         private void picOriginal_MouseDown(object sender, MouseEventArgs e)
         {
@@ -363,7 +336,6 @@ namespace project
             // Make a Bitmap to display the selection rectangle.
              Bitmap bm = new Bitmap(UploadedImageBitmap.BM);
            
-
             // Draw the rectangle.
             using (Graphics gr = Graphics.FromImage(bm))
             {
@@ -395,11 +367,11 @@ namespace project
             Bitmap area = new Bitmap(width, height);
             using (Graphics gr = Graphics.FromImage(area))
             {
-                Rectangle source_rectangle = new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), width, height);
+                Rectangle sourceRectangle = new Rectangle(Math.Min(X0, X1), Math.Min(Y0, Y1), width, height);
                 
                 Rectangle dest_rectangle = new Rectangle(0, 0, width, height);
                
-                gr.DrawImage(UploadedImageBitmap.BM, dest_rectangle, source_rectangle, GraphicsUnit.Pixel);
+                gr.DrawImage(UploadedImageBitmap.BM, dest_rectangle, sourceRectangle, GraphicsUnit.Pixel);
             }
 
             // Display the result.

@@ -16,8 +16,10 @@ namespace project
 
         private void UploadImgBox1(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp";
+            OpenFileDialog opnfd = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp"
+            };
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
 
@@ -28,8 +30,10 @@ namespace project
 
         private void UploadImgBox2(object sender, EventArgs e)
         {
-            OpenFileDialog opnfd = new OpenFileDialog();
-            opnfd.Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp";
+            OpenFileDialog opnfd = new OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg;*.jpeg;.*.gif;*.png;*.bmp)|*.jpg;*.jpeg;.*.gif;*.png;*.bmp"
+            };
             if (opnfd.ShowDialog() == DialogResult.OK)
             {
 
@@ -40,10 +44,11 @@ namespace project
 
         private async void SortingByFolders(object sender, EventArgs e)
         {
-            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
+            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog
+            {
+                InitialDirectory = "c:\\Users", IsFolderPicker = true
+            };
 
-            folderDialog.InitialDirectory = "c:\\Users";
-            folderDialog.IsFolderPicker = true;
 
             if (folderDialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -75,13 +80,19 @@ namespace project
 
         private void LaplacianCompare(object sender, EventArgs e)
         {
-            //could outline the white outline using a pen tool and replace a bitmap with that sketch
+           
             bool grayscale = true;
             Bitmap BM1 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox1.Image), grayscale);
             Bitmap BM2 = ImageFilter.Laplacian3x3Filter(new Bitmap(pictureBox2.Image), grayscale);
 
+           
+
+            ImageFilter.DrawOutlineFromLaplacian(BM1, Color.FromArgb(0, 0, 0), Color.Red);
+            ImageFilter.DrawOutlineFromLaplacian(BM2, Color.FromArgb(0, 0, 0), Color.Red);
+
             ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
             ImageFilter.ReplaceColor(BM1, Color.FromArgb(0, 0, 0), Color.Empty);
+
 
             pictureBox1.Image = BM1;
             pictureBox2.Image = BM2;

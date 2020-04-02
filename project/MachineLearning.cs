@@ -71,14 +71,6 @@ namespace project
 
         }
 
-        private static void DisplayResults(IEnumerable<ImagePrediction> imagePredictionData)
-        {
-            foreach (ImagePrediction prediction in imagePredictionData)
-            {
-                Console.WriteLine($"Image: {Path.GetFileName(prediction.ImagePath)} " +
-                    $"predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ");
-            }
-        }
 
         public static string[] ClassifySingleImage(MLContext mlContext, ITransformer model)
         {
@@ -87,27 +79,17 @@ namespace project
                 ImagePath = _predictSingleImage
             };
 
-            // Make prediction function (input = ImageData, output = ImagePrediction)
-            var predictor = mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
-            var prediction = predictor.Predict(imageData);
+                       var predictor = mlContext.Model.CreatePredictionEngine<ImageData, ImagePrediction>(model);
+                       var prediction = predictor.Predict(imageData);
 
             string output = $"Image: {Path.GetFileName(imageData.ImagePath)} " +
-                                      $"predicted as: {prediction.PredictedLabelValue} with score: {prediction.Score.Max()} ";
+                                      $"predicted as {prediction.PredictedLabelValue} with {prediction.Score.Max()*100} % probability";
             string[] result = new string[2] { output, prediction.PredictedLabelValue };
             return result;
         }
 
 
 
-        public static IEnumerable<ImageData> ReadFromTsv(string file, string folder)
-        {
-            return File.ReadAllLines(file)
-            .Select(line => line.Split('\t'))
-             .Select(line => new ImageData()
-             {
-                 ImagePath = Path.Combine(folder, line[0])
-             });
-        }
 
     }
 }

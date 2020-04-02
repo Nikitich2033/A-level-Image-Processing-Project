@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
@@ -326,12 +327,13 @@
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.SystemColors.GrayText;
+            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Location = new System.Drawing.Point(63, 510);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 42;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.recurringColorBoxClick);
@@ -339,6 +341,7 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.SystemColors.GrayText;
+            this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox5.InitialImage = null;
             this.pictureBox5.Location = new System.Drawing.Point(634, 479);
@@ -447,7 +450,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainWindow";
-            this.Text = "Image Manipulation";
+            this.Text = " Image Manipulation";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
