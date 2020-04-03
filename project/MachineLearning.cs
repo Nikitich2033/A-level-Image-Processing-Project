@@ -11,7 +11,7 @@ namespace project
     class MachineLearning
     {
     
-        static readonly string _assetsPath = Path.Combine( @"D:\Images\" , "assets"); 
+        static readonly string _assetsPath =  "assets"; 
         static readonly string _imagesFolder = Path.Combine(_assetsPath, "images");
         static readonly string _trainTagsTsv = Path.Combine(_imagesFolder, "tags.tsv");
         static readonly string _testTagsTsv = Path.Combine(_imagesFolder, "test-tags.tsv");

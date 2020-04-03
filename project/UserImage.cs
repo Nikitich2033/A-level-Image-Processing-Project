@@ -55,10 +55,11 @@ namespace project
         {
             List<UserImage> Result = new List<UserImage>();
 
-            if (File.Exists(@"D:\Images\data.json"))
+            if (File.Exists(@"data.json"))
             {
                 string existingData;
-                using (StreamReader reader = new StreamReader(@"D:\Images\data.json", Encoding.Default))
+                //using (StreamReader reader = new StreamReader(@"D:\Images\data.json", Encoding.Default))
+                using (StreamReader reader = new StreamReader(@"data.json", Encoding.Default))
                 {
                     existingData = reader.ReadToEnd();
                 }
@@ -79,7 +80,7 @@ namespace project
         public void update_JSON(List<UserImage> Images)
         {
             string json = JsonConvert.SerializeObject(Images.ToArray(), Formatting.Indented);
-            File.WriteAllText(@"D:\Images\data.json", json);
+            File.WriteAllText(@"data.json", json);
             
         }
 

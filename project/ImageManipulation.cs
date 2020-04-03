@@ -79,7 +79,7 @@ namespace project
 
         public static string CompareImages(Bitmap sourceImage, Bitmap comparedToImage)
         {
-            string folderName = @"D:\Images";
+            string folderName = @"Compared Images";
             string pathString = null;
             string fileName = @"\image";
             Random rnd = new Random();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace project
 {
@@ -19,5 +20,11 @@ namespace project
             this.Close();
             
         }
+
+        private void openReadme(object sender, EventArgs e)
+        {
+            Process.Start(@"assets\README.txt");
+        }
+
     }
 }

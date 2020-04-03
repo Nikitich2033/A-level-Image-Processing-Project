@@ -1,6 +1,4 @@
-﻿
-
-namespace project
+﻿namespace project
 {
     class ImagePrediction : ImageData
     {

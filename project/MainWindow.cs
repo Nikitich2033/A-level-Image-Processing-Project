@@ -278,12 +278,12 @@ namespace project
 
         private void openProgramDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(@"D:\Images");
+            
+            Process.Start(Application.StartupPath);
         }
 
         private void SuggestedFilterBoxClick(object sender, EventArgs e)
-        {
-           
+        {          
             pictureBox5.Image = ImageFilter.SuggestedFilter(UploadedImageBitmap);
             pictureBox1.Image = pictureBox5.Image;
         }
@@ -294,6 +294,13 @@ namespace project
             pictureBox1.Image = UploadedImageBitmap.BM;
         }
 
+        private void OpenComparison(object sender, EventArgs e)
+        {
+            var window = new ImageComparisonWindow();
+
+            window.ShowDialog();
+
+        }
 
 
         // AREA SELECTION
@@ -303,14 +310,6 @@ namespace project
 
         // The area we are selecting.
         private int X0, Y0, X1, Y1;
-
-        private void OpenComparison(object sender, EventArgs e)
-        {
-            var window = new ImageComparisonWindow();
-            
-            window.ShowDialog();
-            
-        }
 
         // Start selecting the rectangle.
         private void picOriginal_MouseDown(object sender, MouseEventArgs e)
