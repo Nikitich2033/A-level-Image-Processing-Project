@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>C:\Users\Dell Alienware\Desktop\|publish\</PublishUrlHistory>
+    <PublishUrlHistory>C:\Users\Dell Alienware\Downloads\|C:\Users\Dell Alienware\Desktop\|publish\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />
-    <BootstrapperUrlHistory />
+    <BootstrapperUrlHistory>C:\Users\Dell Alienware\OneDrive - Stowe School\COMP\CSproject\code\project\bin\x64\Release\assets</BootstrapperUrlHistory>
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup>
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
